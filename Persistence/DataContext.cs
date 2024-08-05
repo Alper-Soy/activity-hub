@@ -1,4 +1,4 @@
-using Domain.features.activity;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
