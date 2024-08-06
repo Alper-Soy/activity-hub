@@ -484,3 +484,6 @@ $RECYCLE.BIN/
 *.swp
 
 appsettings.json
+activity-hub.db
+activity-hub.db-shm
+activity-hub.db-wal
