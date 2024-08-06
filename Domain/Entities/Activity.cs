@@ -1,4 +1,4 @@
-namespace Domain.features.activity;
+namespace Domain.Entities;
 
 public class Activity
 {
