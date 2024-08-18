@@ -1,17 +1,23 @@
+using Application.Core;
 using AutoMapper;
 using MediatR;
 using Persistence;
 
 namespace Application.Activities.Commands.UpdateActivity;
 
-public class UpdateActivityHandler(DataContext context, IMapper mapper) : IRequestHandler<UpdateActivityCommand>
+public class UpdateActivityHandler(DataContext context, IMapper mapper)
+    : IRequestHandler<UpdateActivityCommand, Result<Unit>>
 {
-    public async Task Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
     {
         var activity = await context.Activities.FindAsync(request.Activity.Id);
 
+        if (activity == null) return null;
+
         mapper.Map(request.Activity, activity);
 
-        await context.SaveChangesAsync();
+        var result = await context.SaveChangesAsync() > 0;
+
+        return !result ? Result<Unit>.Failure("Failed to update activity") : Result<Unit>.Success(Unit.Value);
     }
 }
