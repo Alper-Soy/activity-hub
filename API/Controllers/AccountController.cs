@@ -34,10 +34,18 @@ public class AccountController(UserManager<User> userManager, TokenService token
     public async Task<ActionResult<AuthUserDto>> Register(RegisterDto registerDto)
     {
         if (await userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
-            return BadRequest("Username is already taken");
+        {
+            ModelState.AddModelError("username", "Username taken");
+            return ValidationProblem();
+        }
+
 
         if (await userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
-            return BadRequest("Email is already taken");
+        {
+            ModelState.AddModelError("email", "Email taken");
+            return ValidationProblem();
+        }
+
 
         var user = new User
         {
