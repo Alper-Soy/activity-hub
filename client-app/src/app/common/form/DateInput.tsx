@@ -4,7 +4,6 @@ import { Form, Label } from 'semantic-ui-react';
 
 export default function DateInput(props: Partial<ReactDatePickerProps>) {
   const [field, meta, helpers] = useField(props.name!);
-  useControllers;
   return (
     <Form.Field error={meta.touched && !!meta.error}>
       <DatePicker
