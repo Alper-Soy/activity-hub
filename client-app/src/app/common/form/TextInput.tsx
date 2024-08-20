@@ -7,7 +7,7 @@ interface Props {
   label?: string;
 }
 
-export default function MyTextInput(props: Props) {
+export default function TextInput(props: Props) {
   const [field, meta] = useField(props.name);
   return (
     <Form.Field error={meta.touched && !!meta.error}>
