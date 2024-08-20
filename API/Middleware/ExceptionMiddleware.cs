@@ -29,7 +29,7 @@ public class ExceptionMiddleware(
             var response = env.IsDevelopment()
                 ? new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace)
                 : new AppException(context.Response.StatusCode, "Internal Server Error");
-            
+
 
             var json = JsonSerializer.Serialize(response, JsonOptions);
 
