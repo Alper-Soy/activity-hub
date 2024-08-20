@@ -8,11 +8,11 @@ import { v4 as uuid } from 'uuid';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Activity } from '../../../app/models/activity';
-import MyTextInput from '../../../app/common/form/MyTextInput';
-import MyTextAreaInput from '../../../app/common/form/MyTextArea';
-import MySelectInput from '../../../app/common/form/MySelectInput';
+import TextInput from '../../../app/common/form/TextInput';
+import TextAreaInput from '../../../app/common/form/TextArea';
+import SelectInput from '../../../app/common/form/SelectInput';
 import { categoryOptions } from '../../../app/common/options/categoryOptions';
-import MyDateInput from '../../../app/common/form/MyDateInput';
+import DateInput from '../../../app/common/form/DateInput';
 
 export default observer(function ActivityForm() {
   const { activityStore } = useStore();
@@ -78,18 +78,18 @@ export default observer(function ActivityForm() {
       >
         {({ handleSubmit, isValid, isSubmitting, dirty }) => (
           <Form className="ui form" onSubmit={handleSubmit} autoComplete="off">
-            <MyTextInput name="title" placeholder="Title" />
-            <MyTextAreaInput
+            <TextInput name="title" placeholder="Title" />
+            <TextAreaInput
               rows={3}
               name="description"
               placeholder="Description"
             />
-            <MySelectInput
+            <SelectInput
               options={categoryOptions}
               name="category"
               placeholder="Category"
             />
-            <MyDateInput
+            <DateInput
               name="date"
               placeholderText="Date"
               showTimeSelect
@@ -98,8 +98,8 @@ export default observer(function ActivityForm() {
             />
 
             <Header content="Location Details" sub color="teal" />
-            <MyTextInput name="venue" placeholder="Venue" />
-            <MyTextInput name="city" placeholder="city" />
+            <TextInput name="venue" placeholder="Venue" />
+            <TextInput name="city" placeholder="city" />
 
             <Button
               disabled={isSubmitting || !dirty || !isValid}
