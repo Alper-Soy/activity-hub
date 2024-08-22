@@ -2,7 +2,7 @@ using Application.Core;
 using MediatR;
 using Persistence;
 
-namespace Application.Activities.Commands.DeleteActivity;
+namespace Application.Features.Activities.Commands.DeleteActivity;
 
 public class DeleteActivityHandler(DataContext context) : IRequestHandler<DeleteActivityCommand, Result<Unit>>
 {

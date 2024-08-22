@@ -1,7 +1,7 @@
-using Application.Activities.Commons;
+using Application.Features.Activities.Commons;
 using FluentValidation;
 
-namespace Application.Activities.Commands.CreateActivity;
+namespace Application.Features.Activities.Commands.CreateActivity;
 
 public class CreateActivityValidator : AbstractValidator<CreateActivityCommand>
 {

@@ -3,7 +3,7 @@ using AutoMapper;
 using MediatR;
 using Persistence;
 
-namespace Application.Activities.Commands.UpdateActivity;
+namespace Application.Features.Activities.Commands.UpdateActivity;
 
 public class UpdateActivityHandler(DataContext context, IMapper mapper)
     : IRequestHandler<UpdateActivityCommand, Result<Unit>>
@@ -16,7 +16,7 @@ public class UpdateActivityHandler(DataContext context, IMapper mapper)
 
         mapper.Map(request.Activity, activity);
 
-        var result = await context.SaveChangesAsync() > 0;
+        var result = await context.SaveChangesAsync(cancellationToken) > 0;
 
         return !result ? Result<Unit>.Failure("Failed to update activity") : Result<Unit>.Success(Unit.Value);
     }
