@@ -1,9 +1,11 @@
-using Application.Activities.Commands.CreateActivity;
-using Application.Activities.Commands.DeleteActivity;
-using Application.Activities.Commands.UpdateActivity;
-using Application.Activities.Queries.GetActivities;
-using Application.Activities.Queries.GetActivity;
+using Application.Features.Activities.Commands.CreateActivity;
+using Application.Features.Activities.Commands.DeleteActivity;
+using Application.Features.Activities.Commands.UpdateActivity;
+using Application.Features.Activities.Queries.GetActivities;
+using Application.Features.Activities.Queries.GetActivity;
+using Application.Features.Attendance.Commands.UpdateAttendance;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -29,6 +31,7 @@ public class ActivitiesController : BaseApiController
         return HandleResult(await Mediator.Send(new CreateActivityCommand { Activity = activity }));
     }
 
+    [Authorize(Policy = "IsActivityHost")]
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateActivity(Guid id, Activity activity)
     {
@@ -36,9 +39,16 @@ public class ActivitiesController : BaseApiController
         return HandleResult(await Mediator.Send(new UpdateActivityCommand { Activity = activity }));
     }
 
+    [Authorize(Policy = "IsActivityHost")]
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> DeleteActivity(Guid id)
     {
         return HandleResult(await Mediator.Send(new DeleteActivityCommand { Id = id }));
+    }
+
+    [HttpPost("{id:guid}/attend")]
+    public async Task<IActionResult> Attend(Guid id)
+    {
+        return HandleResult(await Mediator.Send(new UpdateAttendanceCommand { Id = id }));
     }
 }

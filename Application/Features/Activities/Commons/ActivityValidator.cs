@@ -1,7 +1,7 @@
 using Domain.Entities;
 using FluentValidation;
 
-namespace Application.Activities.Commons;
+namespace Application.Features.Activities.Commons;
 
 public class ActivityValidator : AbstractValidator<Activity>
 {

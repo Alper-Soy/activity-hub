@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -10,9 +11,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240820154217_ActivityAttendee")]
+    partial class ActivityAttendee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
@@ -34,9 +37,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsCancelled")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
@@ -268,7 +268,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.ActivityAttendee", b =>
                 {
                     b.HasOne("Domain.Entities.Activity", "Activity")
-                        .WithMany("Attendees")
+                        .WithMany("Attendess")
                         .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -337,7 +337,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Activity", b =>
                 {
-                    b.Navigation("Attendees");
+                    b.Navigation("Attendess");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

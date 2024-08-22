@@ -2,7 +2,7 @@ using Application.Core;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Activities.Commands.UpdateActivity;
+namespace Application.Features.Activities.Commands.UpdateActivity;
 
 public class UpdateActivityCommand : IRequest<Result<Unit>>
 {

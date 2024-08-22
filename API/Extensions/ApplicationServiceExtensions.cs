@@ -1,8 +1,10 @@
-using Application.Activities.Commands.CreateActivity;
-using Application.Activities.Queries.GetActivities;
 using Application.Core;
+using Application.Features.Activities.Commands.CreateActivity;
+using Application.Features.Activities.Queries.GetActivities;
+using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -22,6 +24,8 @@ public static class ApplicationServiceExtensions
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserAccessor, UserAccessor>();
 
         return services;
     }

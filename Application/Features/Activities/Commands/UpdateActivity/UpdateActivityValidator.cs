@@ -1,7 +1,7 @@
-using Application.Activities.Commons;
+using Application.Features.Activities.Commons;
 using FluentValidation;
 
-namespace Application.Activities.Commands.UpdateActivity;
+namespace Application.Features.Activities.Commands.UpdateActivity;
 
 public class UpdateActivityValidator : AbstractValidator<UpdateActivityCommand>
 {
