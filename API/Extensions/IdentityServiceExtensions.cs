@@ -1,7 +1,9 @@
 using System.Text;
 using API.Services.Auth;
 using Domain.Entities;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
 
@@ -19,7 +21,7 @@ public static class IdentityServiceExtensions
             .AddEntityFrameworkStores<DataContext>();
 
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]!));
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
@@ -30,7 +32,11 @@ public static class IdentityServiceExtensions
                 ValidateAudience = false
             };
         });
-
+        services.AddAuthorization(opt =>
+        {
+            opt.AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
+        });
+        services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
         services.AddScoped<TokenService>();
 
         return services;
