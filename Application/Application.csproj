@@ -13,6 +13,9 @@
 
     <ItemGroup>
         <Folder Include="Features\Attendance\Queries\"/>
+        <Folder Include="Features\Photos\Queries\"/>
+        <Folder Include="Features\Profiles\Commands\"/>
+        <Folder Include="Photos\"/>
     </ItemGroup>
 
     <PropertyGroup>
