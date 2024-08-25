@@ -17,14 +17,14 @@ public class UpdateAttendanceHandler(DataContext context, IUserAccessor userAcce
 
         if (user == null) return null;
 
-        var activity = await context.Activities.Include(a => a.Attendees).ThenInclude(u => u.User)
+        var activity = await context.Activities.Include(a => a.Attendees).ThenInclude(u => u.AppUser)
             .SingleOrDefaultAsync(x => x.Id == request.Id);
 
         if (activity == null) return null;
 
-        var hostUsername = activity.Attendees.FirstOrDefault(x => x.IsHost)?.User?.UserName;
+        var hostUsername = activity.Attendees.FirstOrDefault(x => x.IsHost)?.AppUser?.UserName;
 
-        var attendance = activity.Attendees.FirstOrDefault(x => x.User.UserName == user.UserName);
+        var attendance = activity.Attendees.FirstOrDefault(x => x.AppUser.UserName == user.UserName);
 
         if (attendance != null && hostUsername == user.UserName) activity.IsCancelled = !activity.IsCancelled;
 
@@ -34,7 +34,7 @@ public class UpdateAttendanceHandler(DataContext context, IUserAccessor userAcce
         {
             attendance = new ActivityAttendee
             {
-                User = user,
+                AppUser = user,
                 Activity = activity,
                 IsHost = false
             };

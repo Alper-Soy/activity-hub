@@ -6,11 +6,11 @@ namespace Persistence;
 public class Seed
 {
     public static async Task SeedData(DataContext context,
-        UserManager<User> userManager)
+        UserManager<AppUser> userManager)
     {
         if (!userManager.Users.Any() && !context.Activities.Any())
         {
-            var users = new List<User>
+            var users = new List<AppUser>
             {
                 new()
                 {
@@ -48,7 +48,7 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[0],
+                            AppUser = users[0],
                             IsHost = true
                         }
                     }
@@ -65,12 +65,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[0],
+                            AppUser = users[0],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = false
                         }
                     }
@@ -87,12 +87,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[2],
+                            AppUser = users[2],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = false
                         }
                     }
@@ -109,12 +109,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[0],
+                            AppUser = users[0],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[2],
+                            AppUser = users[2],
                             IsHost = false
                         }
                     }
@@ -131,12 +131,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[0],
+                            AppUser = users[0],
                             IsHost = false
                         }
                     }
@@ -153,7 +153,7 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = true
                         }
                     }
@@ -170,12 +170,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[0],
+                            AppUser = users[0],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = false
                         }
                     }
@@ -192,12 +192,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[2],
+                            AppUser = users[2],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = false
                         }
                     }
@@ -214,12 +214,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[0],
+                            AppUser = users[0],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[2],
+                            AppUser = users[2],
                             IsHost = false
                         }
                     }
@@ -236,12 +236,12 @@ public class Seed
                     {
                         new()
                         {
-                            User = users[2],
+                            AppUser = users[2],
                             IsHost = true
                         },
                         new()
                         {
-                            User = users[1],
+                            AppUser = users[1],
                             IsHost = false
                         }
                     }
