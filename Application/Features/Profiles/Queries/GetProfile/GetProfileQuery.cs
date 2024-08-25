@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Features.Profiles.Queries.GetProfile;
 
-public class GetProfileQuery : IRequest<Result<Profile>>
+public class GetProfileQuery : IRequest<Result<ProfileDto>>
 {
     public string Username { get; set; }
 }

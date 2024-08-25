@@ -65,7 +65,8 @@ public class AccountController(UserManager<User> userManager, TokenService token
     [HttpGet]
     public async Task<ActionResult<AuthUserDto>> GetCurrentUser()
     {
-        var user = await userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Email == User.FindFirstValue(ClaimTypes.Email));
+        var user = await userManager.Users.Include(p => p.Photos)
+            .FirstOrDefaultAsync(u => u.Email == User.FindFirstValue(ClaimTypes.Email));
 
         return CreateUserObject(user);
     }
