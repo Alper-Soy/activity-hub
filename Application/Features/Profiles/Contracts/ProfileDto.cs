@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace Application.Features.Profiles.Contracts;
 
-public class Profile
+public class ProfileDto
 {
     public string Username { get; set; }
     public string DisplayName { get; set; }
