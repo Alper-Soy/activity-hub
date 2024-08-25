@@ -1,6 +1,6 @@
-namespace Application.Profiles;
+namespace Application.Features.Attendance.Contracts;
 
-public class Profile
+public class AttendeeDto
 {
     public string Username { get; set; }
     public string DisplayName { get; set; }
