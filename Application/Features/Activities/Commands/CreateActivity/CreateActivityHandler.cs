@@ -17,7 +17,7 @@ public class CreateActivityHandler(DataContext context, IUserAccessor userAccess
 
         var attendee = new ActivityAttendee
         {
-            User = user,
+            AppUser = user,
             Activity = request.Activity,
             IsHost = true
         };
