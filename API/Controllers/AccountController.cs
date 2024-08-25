@@ -12,7 +12,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AccountController(UserManager<User> userManager, TokenService tokenService) : ControllerBase
+public class AccountController(UserManager<AppUser> userManager, TokenService tokenService) : ControllerBase
 {
     [AllowAnonymous]
     [HttpPost("login")]
@@ -47,7 +47,7 @@ public class AccountController(UserManager<User> userManager, TokenService token
         }
 
 
-        var user = new User
+        var user = new AppUser
         {
             DisplayName = registerDto.DisplayName,
             Email = registerDto.Email,
@@ -71,14 +71,14 @@ public class AccountController(UserManager<User> userManager, TokenService token
         return CreateUserObject(user);
     }
 
-    private AuthUserDto CreateUserObject(User user)
+    private AuthUserDto CreateUserObject(AppUser appUser)
     {
         return new AuthUserDto
         {
-            DisplayName = user.DisplayName,
-            Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-            Token = tokenService.CreateToken(user),
-            Username = user.UserName
+            DisplayName = appUser.DisplayName,
+            Image = appUser.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+            Token = tokenService.CreateToken(appUser),
+            Username = appUser.UserName
         };
     }
 }
