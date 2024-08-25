@@ -26,7 +26,7 @@ public class CreateActivityHandler(DataContext context, IUserAccessor userAccess
 
         context.Activities.Add(request.Activity);
 
-        var result = await context.SaveChangesAsync(cancellationToken) > 0;
+        var result = await context.SaveChangesAsync() > 0;
 
         return !result ? Result<Unit>.Failure("Failed to create activity") : Result<Unit>.Success(Unit.Value);
     }
