@@ -1,6 +1,4 @@
 using Application.Features.Attendance.Contracts;
-using Application.Features.Profiles;
-using Application.Features.Profiles.Contracts;
 
 namespace Application.Features.Activities.Contracts;
 
