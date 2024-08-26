@@ -1,6 +1,8 @@
+using Application.Core;
 using Application.Features.Activities.Commands.CreateActivity;
 using Application.Features.Activities.Commands.DeleteActivity;
 using Application.Features.Activities.Commands.UpdateActivity;
+using Application.Features.Activities.Contracts;
 using Application.Features.Activities.Queries.GetActivities;
 using Application.Features.Activities.Queries.GetActivity;
 using Application.Features.Attendance.Commands.UpdateAttendance;
@@ -13,9 +15,9 @@ namespace API.Controllers;
 public class ActivitiesController : BaseApiController
 {
     [HttpGet]
-    public async Task<IActionResult> GetActivities()
+    public async Task<IActionResult> GetActivities([FromQuery] ActivityParams param)
     {
-        return HandleResult(await Mediator.Send(new GetActivitiesQuery()));
+        return HandlePagedResult(await Mediator.Send(new GetActivitiesQuery { Params = param }));
     }
 
     [HttpGet("{id:guid}")]

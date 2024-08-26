@@ -1,4 +1,5 @@
 using Application.Features.Profiles.Commands.UpdateProfile;
+using Application.Features.Profiles.Queries.GetActivities;
 using Application.Features.Profiles.Queries.GetProfile;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,5 +17,12 @@ public class ProfilesController : BaseApiController
     public async Task<IActionResult> Update(UpdateProfileCommand command)
     {
         return HandleResult(await Mediator.Send(command));
+    }
+
+    [HttpGet("{username}/activities")]
+    public async Task<IActionResult> GetUserActivities(string username,
+        string predicate)
+    {
+        return HandleResult(await Mediator.Send(new GetActivitiesQuery { Username = username, Predicate = predicate }));
     }
 }
