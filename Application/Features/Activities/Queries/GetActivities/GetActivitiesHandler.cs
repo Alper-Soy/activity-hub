@@ -10,14 +10,27 @@ using Persistence;
 namespace Application.Features.Activities.Queries.GetActivities;
 
 public class GetActivitiesHandler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
-    : IRequestHandler<GetActivitiesQuery, Result<List<ActivityDto>>>
+    : IRequestHandler<GetActivitiesQuery, Result<PagedList<ActivityDto>>>
 {
-    public async Task<Result<List<ActivityDto>>> Handle(GetActivitiesQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PagedList<ActivityDto>>> Handle(GetActivitiesQuery request,
+        CancellationToken cancellationToken)
     {
-        var activities = await context.Activities.ProjectTo<ActivityDto>(mapper.ConfigurationProvider,
+        var query = context.Activities.Where(d => d.Date >= request.Params.StartDate).OrderBy(d => d.Date)
+            .ProjectTo<ActivityDto>(mapper.ConfigurationProvider,
                 new { currentUsername = userAccessor.GetUsername() })
-            .ToListAsync(cancellationToken);
+            .AsQueryable();
 
-        return Result<List<ActivityDto>>.Success(activities);
+        if (request.Params.IsGoing && !request.Params.IsHost)
+        {
+            query = query.Where(x => x.Attendees.Any(a => a.Username == userAccessor.GetUsername()));
+        }
+
+        if (request.Params.IsHost && !request.Params.IsGoing)
+        {
+            query = query.Where(x => x.HostUsername == userAccessor.GetUsername());
+        }
+
+        return Result<PagedList<ActivityDto>>.Success(
+            await PagedList<ActivityDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
     }
 }
