@@ -76,7 +76,7 @@ public class AccountController(UserManager<AppUser> userManager, TokenService to
         return new AuthUserDto
         {
             DisplayName = appUser.DisplayName,
-            Image = appUser.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+            Image = appUser.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
             Token = tokenService.CreateToken(appUser),
             Username = appUser.UserName
         };
