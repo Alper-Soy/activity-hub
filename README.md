@@ -17,7 +17,6 @@ Before you begin, make sure you have the following installed on your system:
 
 - **[Docker](https://www.docker.com/products/docker-desktop)**: For containerizing and running the database.
 - **[.NET SDK 8](https://dotnet.microsoft.com/download/dotnet/8.0)**: To run the application.
-- **IDE (Optional)**: Visual Studio, JetBrains Rider, or Visual Studio Code.
 
 ---
 
@@ -41,10 +40,11 @@ Before running the application, set up the required environment variables. You c
 #### Steps:
 
 1. Copy `appsettings.sample.json` to `appsettings.json`:
+   
    ```bash
    cp appsettings.sample.json appsettings.json
-
-
+   ```
+   
 ### 3. Start the Database
 
 The database is configured to run using Docker and is defined in the `docker-compose.yml` file.
